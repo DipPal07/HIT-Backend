@@ -58,3 +58,15 @@ const emailVerificationMailGeneration = (username, verificationURL) => {
   };
 };
 export { sendMail, emailVerificationMailGeneration };
+
+// =================use=================
+//   sendMail({
+//     toEmail: "dip@gmail.com",
+//     subject: "please verify your email",
+//     mailGenContent: emailVerificationMailGeneration(
+//       "dip kumar pal",
+//       "https://google.com"
+//     ),
+//   }).then(() => {
+//     res.send("mail send successfully");
+//   });

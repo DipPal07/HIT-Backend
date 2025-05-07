@@ -3,7 +3,9 @@ import dotenv from "dotenv";
 import cors from "cors";
 import connectDB from "./src/utils/db.js";
 import healthCheckRoute from "./src/routes/healthCheck.routes.js";
-import { emailVerificationMailGeneration, sendMail } from "./src/utils/mail.js";
+import { ApiError } from "./src/utils/ApiError.js";
+import { ApiResponse } from "./src/utils/apiResponse.js";
+import authRoute from "./src/routes/auth.routes.js";
 
 dotenv.config({
   path: "./.env",
@@ -19,18 +21,18 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use("/api", authRoute);
+
 app.use("/api/v1/health-check", healthCheckRoute);
 app.get("/", (req, res) => {
-  sendMail({
-    toEmail: "dip@gmail.com",
-    subject: "please verify your email",
-    mailGenContent: emailVerificationMailGeneration(
-      "dip kumar pal",
-      "https://google.com"
-    ),
-  }).then(() => {
-    res.send("mail send successfully");
-  });
+  try {
+    const response = new ApiResponse(200, "Server is running", null);
+    return res.status(response.statusCode).json(response);
+  } catch (error) {
+    return res
+      .status(500)
+      .json(new ApiError(500, "Internal Server Error", error.message));
+  }
 });
 
 connectDB().then(() => {

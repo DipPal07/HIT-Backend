@@ -1,5 +1,7 @@
 import mongoose, { Schema } from "mongoose";
-import { availableUseRoles, userRoleEnum } from "../utils/constant";
+import { availableUseRoles, userRoleEnum } from "../utils/constant.js";
+import bcrypt from "bcryptjs";
+import crypto from "crypto";
 
 const userSchema = new Schema(
   {
@@ -57,7 +59,10 @@ const userSchema = new Schema(
 
 userSchema.pre("save", async function (next) {
   if (this.isModified("password")) {
-    this.password = await bcrypt.hash(this.password, process.env.BCRYPT_SALT);
+    this.password = await bcrypt.hash(
+      this.password,
+      Number(process.env.BCRYPT_SALT)
+    );
   }
   next();
 });
