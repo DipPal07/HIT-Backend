@@ -8,6 +8,8 @@ import { ApiResponse } from "./src/utils/apiResponse.js";
 import authRoute from "./src/routes/auth.routes.js";
 import jobAndScholarshipRoute from "./src/routes/jobAndScholarship.routes.js";
 import noticeRoute from "./src/routes/notice.routes.js";
+import classRoutineRoute from "./src/routes/classRoutine.routes.js";
+import syllabusRoute from "./src/routes/syllabus.routes.js";
 
 dotenv.config({
   path: "./.env",
@@ -26,6 +28,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api", authRoute);
 app.use("/api/job-and-scholarship", jobAndScholarshipRoute);
 app.use("/api/notice", noticeRoute);
+app.use("/api/class-routine", classRoutineRoute);
+app.use("/api/syllabus", syllabusRoute);
 
 app.use("/api/v1/health-check", healthCheckRoute);
 app.get("/", (req, res) => {

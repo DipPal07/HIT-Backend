@@ -1,39 +1,35 @@
-import ClassRoutine from "../models/classRoutine.models.js";
+// controllers/syllabus.controller.js
+import Syllabus from "../models/syllabus.models.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/apiResponse.js";
 
-const createClassRoutine = async (req, res) => {
+const createSyllabus = async (req, res) => {
   try {
     const { courseName, semester, link } = req.body;
-    const existingClassRoutine = await ClassRoutine.findOne({
-      courseName,
-      semester,
-    });
-    if (existingClassRoutine) {
+    const existingSyllabus = await Syllabus.findOne({ courseName, semester });
+    if (existingSyllabus) {
       const response = new ApiError(
         400,
-        "Class routine already exists",
-        "Class routine already exists"
+        "Syllabus already exists",
+        "Syllabus already exists"
       );
       return res.status(response.statusCode).json(response);
     }
-    const classRoutine = await ClassRoutine.create({
-      courseName,
-      semester,
-      link,
-    });
-    if (!classRoutine) {
+
+    const syllabus = await Syllabus.create({ courseName, semester, link });
+    if (!syllabus) {
       const response = new ApiError(
         400,
-        "Class routine creation failed",
-        "Class routine creation failed"
+        "Syllabus creation failed",
+        "Syllabus creation failed"
       );
       return res.status(response.statusCode).json(response);
     }
+
     const response = new ApiResponse(
       201,
-      "Class routine created successfully",
-      classRoutine
+      "Syllabus created successfully",
+      syllabus
     );
     return res.status(response.statusCode).json(response);
   } catch (error) {
@@ -41,26 +37,29 @@ const createClassRoutine = async (req, res) => {
     return res.status(response.statusCode).json(response);
   }
 };
-const updateClassRoutine = async (req, res) => {
+
+const updateSyllabus = async (req, res) => {
   try {
     const { courseName, semester, link } = req.body;
-    const classRoutine = await ClassRoutine.findOneAndUpdate(
+    const syllabus = await Syllabus.findOneAndUpdate(
       { courseName, semester },
       { link },
       { new: true }
     );
-    if (!classRoutine) {
+
+    if (!syllabus) {
       const response = new ApiError(
         404,
-        "Class routine not found",
-        "Class routine not found"
+        "Syllabus not found",
+        "Syllabus not found"
       );
       return res.status(response.statusCode).json(response);
     }
+
     const response = new ApiResponse(
       200,
-      "Class routine updated successfully",
-      classRoutine
+      "Syllabus updated successfully",
+      syllabus
     );
     return res.status(response.statusCode).json(response);
   } catch (error) {
@@ -69,22 +68,24 @@ const updateClassRoutine = async (req, res) => {
   }
 };
 
-const getClassRoutineByClassNameAndSemester = async (req, res) => {
+const getSyllabusByCourseAndSemester = async (req, res) => {
   try {
     const { courseName, semester } = req.query;
-    const classRoutine = await ClassRoutine.findOne({ courseName, semester });
-    if (!classRoutine) {
+    const syllabus = await Syllabus.findOne({ courseName, semester });
+
+    if (!syllabus) {
       const response = new ApiError(
         404,
-        "Class routine not found",
-        "Class routine not found"
+        "Syllabus not found",
+        "Syllabus not found"
       );
       return res.status(response.statusCode).json(response);
     }
+
     const response = new ApiResponse(
       200,
-      "Class routine fetched successfully",
-      classRoutine
+      "Syllabus fetched successfully",
+      syllabus
     );
     return res.status(response.statusCode).json(response);
   } catch (error) {
@@ -93,8 +94,4 @@ const getClassRoutineByClassNameAndSemester = async (req, res) => {
   }
 };
 
-export {
-  createClassRoutine,
-  getClassRoutineByClassNameAndSemester,
-  updateClassRoutine,
-};
+export { createSyllabus, updateSyllabus, getSyllabusByCourseAndSemester };

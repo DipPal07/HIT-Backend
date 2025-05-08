@@ -51,11 +51,9 @@ const adminRoleVerify = (req, res, next) => {
     }
     const token = authHeader.split(" ")[1];
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    console.log(decoded);
 
     if (!decoded || decoded.role !== userRoleEnum.ADMIN) {
       const response = new ApiError(401, "Invalid token", [], "Unauthorized");
-      console.log(response.message);
 
       return res
         .status(response.statusCode)

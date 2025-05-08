@@ -1,7 +1,8 @@
-import { body } from "express-validator";
+import { body, query } from "express-validator";
 import {
   availableJobAndScholarship,
   availableUseRoles,
+  semester,
 } from "../src/utils/constant.js";
 const registerValidator = () => {
   return [
@@ -164,7 +165,9 @@ const classRoutineValidator = () => {
       .withMessage("Semester is required")
       .trim()
       .isAlpha()
-      .withMessage("Semester must be alphabetic"),
+      .withMessage("Semester must be alphabetic")
+      .isIn(semester)
+      .withMessage("Semester is not correct"),
     body("link")
       .notEmpty()
       .withMessage("Link is required")
@@ -173,7 +176,46 @@ const classRoutineValidator = () => {
       .withMessage("Link must be a valid URL"),
   ];
 };
+const classRoutineFinderValidator = () => {
+  return [
+    query("courseName")
+      .notEmpty()
+      .withMessage("Course name is required")
+      .trim()
+      .isAlpha()
+      .withMessage("Course name must be alphabetic")
+      .isLength({ min: 3, max: 25 }),
+    query("semester")
+      .notEmpty()
+      .withMessage("Semester is required")
+      .trim()
+      .isAlpha()
+      .withMessage("Semester must be alphabetic")
+      .isIn(semester)
+      .withMessage("Semester is not correct"),
+  ];
+};
+const syllabusFinderValidator = () => {
+  return [
+    query("courseName")
+      .notEmpty()
+      .withMessage("Course name is required")
+      .trim()
+      .isAlpha()
+      .withMessage("Course name must be alphabetic")
+      .isLength({ min: 3, max: 25 }),
+    query("semester")
+      .notEmpty()
+      .withMessage("Semester is required")
+      .trim()
+      .isAlpha()
+      .withMessage("Semester must be alphabetic")
+      .isIn(semester)
+      .withMessage("Semester is not correct"),
+  ];
+};
 export {
+  syllabusFinderValidator,
   registerValidator,
   loginValidator,
   forgotPasswordValidator,
@@ -181,4 +223,5 @@ export {
   noticeValidator,
   syllabusValidator,
   classRoutineValidator,
+  classRoutineFinderValidator,
 };

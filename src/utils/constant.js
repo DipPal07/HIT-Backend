@@ -10,3 +10,5 @@ export const jobAndScholarshipEnum = {
   SCHOLARSHIP: "scholarship",
 };
 export const availableJobAndScholarship = Object.values(jobAndScholarshipEnum);
+
+export const semester = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII"];
