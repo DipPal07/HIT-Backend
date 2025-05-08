@@ -70,6 +70,7 @@ const loginUser = async (req, res) => {
       email: user.email,
       avatar: user.avatar,
       courseName: user.courseName,
+      role: user.role,
     };
     const response = new ApiResponse(200, "User logged in successfully", {
       user: userData,

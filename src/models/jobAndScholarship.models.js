@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import { availableJobAndScholarship } from "../utils/constant";
+import { availableJobAndScholarship } from "../utils/constant.js";
 const jobAndScholarshipSchema = new Schema({
   type: { type: String, enum: availableJobAndScholarship, required: true },
   companyName: {
@@ -30,8 +30,8 @@ const jobAndScholarshipSchema = new Schema({
   },
 });
 
-const JonAndScholarship = mongoose.model(
+const JobAndScholarship = mongoose.model(
   "JobAndScholarship",
   jobAndScholarshipSchema
 );
-export default JonAndScholarship;
+export default JobAndScholarship;

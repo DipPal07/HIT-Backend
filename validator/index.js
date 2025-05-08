@@ -1,5 +1,8 @@
 import { body } from "express-validator";
-import { availableUseRoles } from "../src/utils/constant.js";
+import {
+  availableJobAndScholarship,
+  availableUseRoles,
+} from "../src/utils/constant.js";
 const registerValidator = () => {
   return [
     body("name")
@@ -72,4 +75,110 @@ const forgotPasswordValidator = () => {
   ];
 };
 
-export { registerValidator, loginValidator, forgotPasswordValidator };
+const jobAndScholarshipValidator = () => {
+  return [
+    body("type")
+      .notEmpty()
+      .withMessage("Title is required")
+      .isIn(availableJobAndScholarship)
+      .withMessage("Type is not correct"),
+    body("title")
+      .notEmpty()
+      .withMessage("Title is required")
+      .trim()
+      .isLength({ min: 10 })
+      .withMessage("Title must be at least 10 characters"),
+
+    body("description")
+      .notEmpty()
+      .withMessage("Description is required")
+      .trim()
+      .isLength({ min: 10 })
+      .withMessage("Description must be at least 10 characters"),
+    body("applyLink")
+      .notEmpty()
+      .withMessage("Link is required")
+      .trim()
+      .isURL()
+      .withMessage("Link must be a valid URL"),
+    body("image").optional().isURL().withMessage("Image must be a valid URL"),
+    body("lastApplyDate")
+      .notEmpty()
+      .withMessage("Last apply date is required")
+      .isDate()
+      .withMessage("Last apply date must be a valid date"),
+  ];
+};
+
+const noticeValidator = () => {
+  return [
+    body("noticeNo").isNumeric().notEmpty().withMessage("Title is required"),
+    body("date")
+      .notEmpty()
+      .withMessage("Date is required")
+      .isDate()
+      .withMessage("Date must be a valid date"),
+    body("link")
+      .notEmpty()
+      .withMessage("Link is required")
+      .trim()
+      .isURL()
+      .withMessage("Link must be a valid URL"),
+  ];
+};
+
+const syllabusValidator = () => {
+  return [
+    body("courseName")
+      .notEmpty()
+      .withMessage("Course name is required")
+      .trim()
+      .isAlpha()
+      .withMessage("Course name must be alphabetic")
+      .isLength({ min: 3, max: 25 }),
+    body("semester")
+      .notEmpty()
+      .withMessage("Semester is required")
+      .trim()
+      .isAlpha()
+      .withMessage("Semester must be alphabetic"),
+    body("link")
+      .notEmpty()
+      .withMessage("Link is required")
+      .trim()
+      .isURL()
+      .withMessage("Link must be a valid URL"),
+  ];
+};
+const classRoutineValidator = () => {
+  return [
+    body("courseName")
+      .notEmpty()
+      .withMessage("Course name is required")
+      .trim()
+      .isAlpha()
+      .withMessage("Course name must be alphabetic")
+      .isLength({ min: 3, max: 25 }),
+    body("semester")
+      .notEmpty()
+      .withMessage("Semester is required")
+      .trim()
+      .isAlpha()
+      .withMessage("Semester must be alphabetic"),
+    body("link")
+      .notEmpty()
+      .withMessage("Link is required")
+      .trim()
+      .isURL()
+      .withMessage("Link must be a valid URL"),
+  ];
+};
+export {
+  registerValidator,
+  loginValidator,
+  forgotPasswordValidator,
+  jobAndScholarshipValidator,
+  noticeValidator,
+  syllabusValidator,
+  classRoutineValidator,
+};

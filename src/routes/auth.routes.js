@@ -6,6 +6,7 @@ import {
   registerUser,
   verifyEmail,
 } from "../controllers/auth.controller.js";
+import { adminRoleVerify } from "../utils/apiAuthentication.js";
 
 const authRoute = express.Router();
 

@@ -6,6 +6,8 @@ import healthCheckRoute from "./src/routes/healthCheck.routes.js";
 import { ApiError } from "./src/utils/ApiError.js";
 import { ApiResponse } from "./src/utils/apiResponse.js";
 import authRoute from "./src/routes/auth.routes.js";
+import jobAndScholarshipRoute from "./src/routes/jobAndScholarship.routes.js";
+import noticeRoute from "./src/routes/notice.routes.js";
 
 dotenv.config({
   path: "./.env",
@@ -22,6 +24,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api", authRoute);
+app.use("/api/job-and-scholarship", jobAndScholarshipRoute);
+app.use("/api/notice", noticeRoute);
 
 app.use("/api/v1/health-check", healthCheckRoute);
 app.get("/", (req, res) => {

@@ -3,6 +3,7 @@ const noticeSchema = new Schema({
   noticeNo: {
     type: String,
     required: true,
+    unique: true,
   },
   date: {
     type: Date,
