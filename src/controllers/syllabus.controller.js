@@ -5,7 +5,8 @@ import { ApiResponse } from "../utils/apiResponse.js";
 
 const createSyllabus = async (req, res) => {
   try {
-    const { courseName, semester, link } = req.body;
+    const pdfFileURL = `/public/${req.file.filename}`;
+    const { courseName, semester } = req.body;
     const existingSyllabus = await Syllabus.findOne({ courseName, semester });
     if (existingSyllabus) {
       const response = new ApiError(
@@ -16,7 +17,11 @@ const createSyllabus = async (req, res) => {
       return res.status(response.statusCode).json(response);
     }
 
-    const syllabus = await Syllabus.create({ courseName, semester, link });
+    const syllabus = await Syllabus.create({
+      courseName,
+      semester,
+      link: pdfFileURL,
+    });
     if (!syllabus) {
       const response = new ApiError(
         400,
@@ -40,10 +45,11 @@ const createSyllabus = async (req, res) => {
 
 const updateSyllabus = async (req, res) => {
   try {
-    const { courseName, semester, link } = req.body;
+    const pdfFileURL = `/public/${req.file.filename}`;
+    const { courseName, semester } = req.body;
     const syllabus = await Syllabus.findOneAndUpdate(
       { courseName, semester },
-      { link },
+      { link: pdfFileURL },
       { new: true }
     );
 

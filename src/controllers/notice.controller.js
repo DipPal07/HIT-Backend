@@ -27,11 +27,12 @@ const getAllNotices = async (req, res) => {
 
 const createNotice = async (req, res) => {
   try {
-    const { noticeNo, date, link } = req.body;
+    const pdfFileURL = `/public/${req.file.filename}`;
+    const { noticeNo, date } = req.body;
     const notice = await Notice.create({
       noticeNo,
       date,
-      link,
+      link: pdfFileURL,
     });
     if (!notice) {
       const response = new ApiError(

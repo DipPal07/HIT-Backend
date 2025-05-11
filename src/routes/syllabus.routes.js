@@ -10,6 +10,7 @@ import {
   syllabusValidator,
 } from "../../validator/index.js";
 import { validate } from "../middlewares/validator.middleware.js";
+import upload from "../middlewares/multer.middlewares.js";
 
 const syllabusRoute = express.Router();
 
@@ -25,6 +26,7 @@ syllabusRoute.get(
 syllabusRoute.post(
   "/",
   adminRoleVerify,
+  upload.single("pdf"),
   syllabusValidator(),
   validate,
   createSyllabus
@@ -34,6 +36,7 @@ syllabusRoute.post(
 syllabusRoute.put(
   "/",
   adminRoleVerify,
+  upload.single("pdf"),
   syllabusValidator(),
   validate,
   updateSyllabus

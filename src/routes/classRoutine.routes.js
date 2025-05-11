@@ -10,6 +10,7 @@ import {
 } from "../../validator/index.js";
 import { validate } from "../middlewares/validator.middleware.js";
 import { adminRoleVerify } from "../utils/apiAuthentication.js";
+import upload from "../middlewares/multer.middlewares.js";
 
 const classRoutineRoute = express.Router();
 
@@ -22,13 +23,14 @@ classRoutineRoute.get(
 classRoutineRoute.post(
   "/",
   adminRoleVerify,
-  classRoutineValidator(),
-  validate,
+  upload.single("pdf"),
+
   createClassRoutine
 );
 classRoutineRoute.put(
   "/",
   adminRoleVerify,
+  upload.single("pdf"),
   classRoutineValidator(),
   validate,
   updateClassRoutine

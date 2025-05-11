@@ -15,11 +15,7 @@ const registerValidator = () => {
       .isLength({ min: 3, max: 25 })
       .matches(/^[a-zA-Z\s'-]+$/)
       .withMessage("Name must not contain special characters"),
-    body("avatar")
-      .trim()
-      .optional()
-      .isURL()
-      .withMessage("Avatar must be a valid URL"),
+    body("avatar").trim().optional(),
     body("role")
       .notEmpty()
       .trim()
@@ -102,7 +98,7 @@ const jobAndScholarshipValidator = () => {
       .trim()
       .isURL()
       .withMessage("Link must be a valid URL"),
-    body("image").optional().isURL().withMessage("Image must be a valid URL"),
+    body("image").optional(),
     body("lastApplyDate")
       .notEmpty()
       .withMessage("Last apply date is required")
@@ -119,12 +115,7 @@ const noticeValidator = () => {
       .withMessage("Date is required")
       .isDate()
       .withMessage("Date must be a valid date"),
-    body("link")
-      .notEmpty()
-      .withMessage("Link is required")
-      .trim()
-      .isURL()
-      .withMessage("Link must be a valid URL"),
+    // body("link").notEmpty().withMessage("Link is required").trim(),
   ];
 };
 
@@ -143,12 +134,6 @@ const syllabusValidator = () => {
       .trim()
       .isAlpha()
       .withMessage("Semester must be alphabetic"),
-    body("link")
-      .notEmpty()
-      .withMessage("Link is required")
-      .trim()
-      .isURL()
-      .withMessage("Link must be a valid URL"),
   ];
 };
 const classRoutineValidator = () => {
@@ -157,8 +142,8 @@ const classRoutineValidator = () => {
       .notEmpty()
       .withMessage("Course name is required")
       .trim()
-      .isAlpha()
-      .withMessage("Course name must be alphabetic")
+      .matches(/^[a-zA-Z\s'-]+$/)
+      .withMessage("Name must not contain special characters")
       .isLength({ min: 3, max: 25 }),
     body("semester")
       .notEmpty()
@@ -168,12 +153,6 @@ const classRoutineValidator = () => {
       .withMessage("Semester must be alphabetic")
       .isIn(semester)
       .withMessage("Semester is not correct"),
-    body("link")
-      .notEmpty()
-      .withMessage("Link is required")
-      .trim()
-      .isURL()
-      .withMessage("Link must be a valid URL"),
   ];
 };
 const classRoutineFinderValidator = () => {
@@ -182,8 +161,8 @@ const classRoutineFinderValidator = () => {
       .notEmpty()
       .withMessage("Course name is required")
       .trim()
-      .isAlpha()
-      .withMessage("Course name must be alphabetic")
+      .matches(/^[a-zA-Z\s'-]+$/)
+      .withMessage("Name must not contain special characters")
       .isLength({ min: 3, max: 25 }),
     query("semester")
       .notEmpty()

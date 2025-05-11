@@ -4,7 +4,7 @@ import { ApiResponse } from "../utils/apiResponse.js";
 
 const createClassRoutine = async (req, res) => {
   try {
-    const { courseName, semester, link } = req.body;
+    const { courseName, semester } = req.body;
     const existingClassRoutine = await ClassRoutine.findOne({
       courseName,
       semester,
@@ -17,10 +17,11 @@ const createClassRoutine = async (req, res) => {
       );
       return res.status(response.statusCode).json(response);
     }
+    const pdfFileURL = `/public/${req.file.filename}`;
     const classRoutine = await ClassRoutine.create({
       courseName,
       semester,
-      link,
+      link: pdfFileURL,
     });
     if (!classRoutine) {
       const response = new ApiError(
@@ -35,18 +36,21 @@ const createClassRoutine = async (req, res) => {
       "Class routine created successfully",
       classRoutine
     );
+
     return res.status(response.statusCode).json(response);
   } catch (error) {
     const response = new ApiError(500, "Internal Server Error", error.message);
     return res.status(response.statusCode).json(response);
   }
 };
+
 const updateClassRoutine = async (req, res) => {
   try {
-    const { courseName, semester, link } = req.body;
+    const pdfFileURL = `/public/${req.file.filename}`;
+    const { courseName, semester } = req.body;
     const classRoutine = await ClassRoutine.findOneAndUpdate(
       { courseName, semester },
-      { link },
+      { link: pdfFileURL },
       { new: true }
     );
     if (!classRoutine) {
@@ -86,7 +90,9 @@ const getClassRoutineByClassNameAndSemester = async (req, res) => {
       "Class routine fetched successfully",
       classRoutine
     );
-    return res.status(response.statusCode).json(response);
+    setTimeout(() => {
+      return res.status(response.statusCode).json(response);
+    }, 1000);
   } catch (error) {
     const response = new ApiError(500, "Internal Server Error", error.message);
     return res.status(response.statusCode).json(response);
