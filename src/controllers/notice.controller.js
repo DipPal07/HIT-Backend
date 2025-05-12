@@ -16,7 +16,7 @@ const getAllNotices = async (req, res) => {
     const response = new ApiResponse(
       200,
       "Notices fetched successfully",
-      notices
+      notices.reverse()
     );
     return res.status(response.statusCode).json(response);
   } catch (error) {

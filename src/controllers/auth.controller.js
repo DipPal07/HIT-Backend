@@ -2,6 +2,7 @@ import User from "../models/user.models.js";
 import { generateToken } from "../utils/apiAuthentication.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/apiResponse.js";
+import { userRoleEnum } from "../utils/constant.js";
 import { emailVerificationMailGeneration, sendMail } from "../utils/mail.js";
 
 const registerUser = async (req, res) => {
@@ -13,6 +14,7 @@ const registerUser = async (req, res) => {
       avatar,
       password,
       courseName,
+      role: userRoleEnum.STUDENT,
     });
     if (!user) {
       const response = new ApiError(
@@ -36,12 +38,12 @@ const registerUser = async (req, res) => {
     user.emailVerificationToken = emailVerificationToken;
     user.emailVerificationTokenExpires = Date.now() + 30 * 60 * 1000; // 30 minutes
     user.save();
-    return res.status(200).json({
-      message: "User registered successfully",
-      data: user,
-    });
+    const response = new ApiResponse(201, "User registered successfully", user);
+    return res.status(200).json(response);
   } catch (error) {
     const response = new ApiError(500, "Internal Server Error", error.message);
+    console.log(error);
+
     return res.status(response.statusCode).json(response);
   }
 };

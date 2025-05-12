@@ -27,6 +27,7 @@ const createJobAndScholarship = async (req, res) => {
       applyLink,
       image,
       companyName,
+      eligibility,
     } = req.body;
     const job = await JobAndScholarship.create({
       title,
@@ -36,6 +37,7 @@ const createJobAndScholarship = async (req, res) => {
       applyLink,
       image,
       companyName,
+      eligibility,
     });
     if (!job) {
       const response = new ApiError(

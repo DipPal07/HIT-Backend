@@ -16,20 +16,7 @@ const registerValidator = () => {
       .matches(/^[a-zA-Z\s'-]+$/)
       .withMessage("Name must not contain special characters"),
     body("avatar").trim().optional(),
-    body("role")
-      .notEmpty()
-      .trim()
-      .isIn(availableUseRoles)
-      .withMessage("role is not correct")
-      .isAlpha()
-      .withMessage("Role must be alphabetic"),
-    body("courseName")
-      .notEmpty()
-      .withMessage("Course name is required")
-      .trim()
-      .isAlpha()
-      .withMessage("Course name must be alphabetic")
-      .isLength({ min: 3, max: 25 }),
+    body("courseName").notEmpty().withMessage("Course name is required").trim(),
     body("email")
       .notEmpty()
       .withMessage("Email is required")
@@ -104,6 +91,14 @@ const jobAndScholarshipValidator = () => {
       .withMessage("Last apply date is required")
       .isDate()
       .withMessage("Last apply date must be a valid date"),
+    body("companyName")
+      .notEmpty()
+      .withMessage("Company name is required")
+      .trim(),
+    body("eligibility")
+      .notEmpty()
+      .withMessage("Eligibility is required")
+      .trim(),
   ];
 };
 
@@ -121,13 +116,7 @@ const noticeValidator = () => {
 
 const syllabusValidator = () => {
   return [
-    body("courseName")
-      .notEmpty()
-      .withMessage("Course name is required")
-      .trim()
-      .isAlpha()
-      .withMessage("Course name must be alphabetic")
-      .isLength({ min: 3, max: 25 }),
+    body("courseName").notEmpty().withMessage("Course name is required").trim(),
     body("semester")
       .notEmpty()
       .withMessage("Semester is required")
@@ -138,13 +127,7 @@ const syllabusValidator = () => {
 };
 const classRoutineValidator = () => {
   return [
-    body("courseName")
-      .notEmpty()
-      .withMessage("Course name is required")
-      .trim()
-      .matches(/^[a-zA-Z\s'-]+$/)
-      .withMessage("Name must not contain special characters")
-      .isLength({ min: 3, max: 25 }),
+    body("courseName").notEmpty().withMessage("Course name is required").trim(),
     body("semester")
       .notEmpty()
       .withMessage("Semester is required")
@@ -160,10 +143,7 @@ const classRoutineFinderValidator = () => {
     query("courseName")
       .notEmpty()
       .withMessage("Course name is required")
-      .trim()
-      .matches(/^[a-zA-Z\s'-]+$/)
-      .withMessage("Name must not contain special characters")
-      .isLength({ min: 3, max: 25 }),
+      .trim(),
     query("semester")
       .notEmpty()
       .withMessage("Semester is required")
@@ -179,10 +159,7 @@ const syllabusFinderValidator = () => {
     query("courseName")
       .notEmpty()
       .withMessage("Course name is required")
-      .trim()
-      .isAlpha()
-      .withMessage("Course name must be alphabetic")
-      .isLength({ min: 3, max: 25 }),
+      .trim(),
     query("semester")
       .notEmpty()
       .withMessage("Semester is required")

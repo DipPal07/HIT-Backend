@@ -25,6 +25,10 @@ const jobAndScholarshipSchema = new Schema({
     type: String,
     required: true,
   },
+  eligibility: {
+    type: String,
+    required: true,
+  },
   image: {
     type: String,
   },
