@@ -90,6 +90,6 @@ app.get("/", (req, res) => {
 
 connectDB().then(() => {
   app.listen(process.env.PORT || 3399, () => {
-    console.log(`Server is running on http://localhost:3000`);
+    console.log(`Server is running on ${process.env.BASE_URL}`);
   });
 });
