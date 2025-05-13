@@ -89,7 +89,7 @@ app.get("/", (req, res) => {
 });
 
 connectDB().then(() => {
-  app.listen(3000, () => {
+  app.listen(process.env.PORT || 3399, () => {
     console.log(`Server is running on http://localhost:3000`);
   });
 });
