@@ -1,7 +1,7 @@
 // controllers/syllabus.controller.js
 import Syllabus from "../models/syllabus.models.js";
 import { ApiError } from "../utils/ApiError.js";
-import { ApiResponse } from "../utils/apiResponse.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
 
 // const createSyllabus = async (req, res) => {
 //   try {

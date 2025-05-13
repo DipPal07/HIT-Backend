@@ -4,7 +4,7 @@ import cors from "cors";
 import connectDB from "./src/utils/db.js";
 import healthCheckRoute from "./src/routes/healthCheck.routes.js";
 import { ApiError } from "./src/utils/ApiError.js";
-import { ApiResponse } from "./src/utils/apiResponse.js";
+import { ApiResponse } from "./src/utils/ApiResponse.js";
 import authRoute from "./src/routes/auth.routes.js";
 import jobAndScholarshipRoute from "./src/routes/jobAndScholarship.routes.js";
 import noticeRoute from "./src/routes/notice.routes.js";

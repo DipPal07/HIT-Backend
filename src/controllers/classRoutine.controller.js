@@ -1,6 +1,6 @@
 import ClassRoutine from "../models/classRoutine.models.js";
 import { ApiError } from "../utils/ApiError.js";
-import { ApiResponse } from "../utils/apiResponse.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
 
 // const createClassRoutine = async (req, res) => {
 //   try {

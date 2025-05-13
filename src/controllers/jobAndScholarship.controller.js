@@ -1,6 +1,6 @@
 import JobAndScholarship from "../models/jobAndScholarship.models.js";
 import { ApiError } from "../utils/ApiError.js";
-import { ApiResponse } from "../utils/apiResponse.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
 
 const getAllJobsAndScholarships = async (req, res) => {
   try {

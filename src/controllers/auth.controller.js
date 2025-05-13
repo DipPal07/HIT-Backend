@@ -1,7 +1,7 @@
 import User from "../models/user.models.js";
 import { generateToken } from "../utils/apiAuthentication.js";
 import { ApiError } from "../utils/ApiError.js";
-import { ApiResponse } from "../utils/apiResponse.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
 import { userRoleEnum } from "../utils/constant.js";
 import { emailVerificationMailGeneration, sendMail } from "../utils/mail.js";
 

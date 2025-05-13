@@ -1,5 +1,5 @@
 import express from "express";
-import { ApiResponse } from "../utils/apiResponse.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
 
 const healthCheckRoute = express.Router();
 

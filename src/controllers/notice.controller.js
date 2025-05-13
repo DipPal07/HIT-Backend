@@ -1,6 +1,6 @@
 import Notice from "../models/notice.models.js";
 import { ApiError } from "../utils/ApiError.js";
-import { ApiResponse } from "../utils/apiResponse.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
 
 const getAllNotices = async (req, res) => {
   try {
