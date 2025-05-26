@@ -4,7 +4,7 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 
 const getAllJobsAndScholarships = async (req, res) => {
   try {
-    const jobs = await JobAndScholarship.find();
+    const jobs = (await JobAndScholarship.find()).reverse();
     if (!jobs || jobs.length === 0) {
       const response = new ApiError(404, "No jobs found", "No jobs found");
       return res.status(response.statusCode).json(response);
